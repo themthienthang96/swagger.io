@@ -1,0 +1,68 @@
+openapi: '3.0.2'
+info:
+  title: API Test
+  version: '1.0.0'
+servers:
+  - url: https://swapi.dev/api/
+  - url: https://reqres.in/api
+    description: Reqres Sever Test
+
+
+
+
+
+
+
+components:
+  securitySchemes:
+    name:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: <> Only for Res
+paths:      
+  /users:
+    post:
+      description: 'API for create new users'
+      parameters: 
+        - name: name
+          in: query 
+          schema: 
+            type: string
+          example: Thang 
+          description: parameter from database table
+        - name: job
+          in: query
+          schema:
+            type: string
+          description: job
+      responses:
+        '201':
+          description: OK
+          content: 
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object 
+                  properties:
+                    name:
+                      type: string
+                    job: 
+                      type: string 
+              example:
+                name: Thang
+                job: Leader
+  /users/{user_id}:
+    get:
+      description: 'Get User Information'
+      parameters: 
+        - name: user_id
+          in: path
+          schema:
+            type: number
+          required: true
+      responses:
+        '200':
+          description: OK
+
